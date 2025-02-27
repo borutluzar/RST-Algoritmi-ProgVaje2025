@@ -17,6 +17,7 @@
             g.AddEdge(new Edge(6, 8, 3));
             g.AddEdge(new Edge(7, 8, 1));
 
+            // Testiranje Primovega algoritma
             Console.WriteLine("Skupna teža: " + g.FindMinimalSpanningTreeWithPrim());
             Console.Read();
         }
