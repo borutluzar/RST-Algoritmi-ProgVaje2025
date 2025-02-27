@@ -39,8 +39,9 @@
             for (int i = 1; i < this.Vertices.Count(); i++)
             {
                 List<Edge> sosede = this.Edges.Where(e =>
-                spanningTree.Vertices.Contains(e.Start) && !spanningTree.Vertices.Contains(e.End)
-                || !spanningTree.Vertices.Contains(e.Start) && spanningTree.Vertices.Contains(e.End)).ToList();
+                    spanningTree.Vertices.Contains(e.Start) && !spanningTree.Vertices.Contains(e.End)
+                        || 
+                    !spanningTree.Vertices.Contains(e.Start) && spanningTree.Vertices.Contains(e.End)).ToList();
 
                 var edgeMin = sosede.MinBy(x => x.Weight);
 
@@ -50,6 +51,21 @@
             var weightTotal = spanningTree.Edges.Sum(x => x.Weight);
 
             return weightTotal;
+        }
+
+        /// <summary>
+        /// Returns all connected components of a graph.
+        /// </summary>
+        public List<List<int>> GetConnectedComponents()
+        {
+            List<List<int>> lstComponents = new List<List<int>>();
+            HashSet<int> lstVisited = new HashSet<int>();
+
+            while (lstVisited.Count() < this.Vertices.Count())
+            {
+                int root = this.Vertices.Where(x => !lstVisited.Contains(x)).FirstOrDefault();
+            }
+            return lstComponents;
         }
     }
 }
