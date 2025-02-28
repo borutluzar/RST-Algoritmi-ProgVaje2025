@@ -18,7 +18,10 @@
             g.AddEdge(new Edge(7, 8, 1));
 
             // Testiranje Primovega algoritma
-            Console.WriteLine("Skupna teža: " + g.FindMinimalSpanningTreeWithPrim());
+            Console.WriteLine("Skupna teža po Primu: " + g.FindMinimalSpanningTreeWithPrim());
+            // g.GetConnectedComponents();
+            // g.ContainsCycle();
+            Console.WriteLine("Skupna teža po Kruskalu: " + g.FindMinimalSpanningTreeWithKruskal()); 
             Console.Read();
         }
     }
