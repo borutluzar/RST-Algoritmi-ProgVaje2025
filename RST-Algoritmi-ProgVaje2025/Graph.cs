@@ -16,7 +16,6 @@
         /// Adds an edge in the graph if it does not exists. 
         /// Otherwise it increases the weight. 
         /// </summary>
-        /// <param name="e"></param>
         public void AddEdge(Edge e)
         {
             Vertices.Add(e.Start);
@@ -31,6 +30,10 @@
             }
         }
 
+        /// <summary>
+        /// Returns the sum of weights on the edges of a minimal spanning tree
+        /// obtained by Prim's algorithm.
+        /// </summary>
         public int FindMinimalSpanningTreeWithPrim()
         {
             int currentVertex = Vertices.First();
