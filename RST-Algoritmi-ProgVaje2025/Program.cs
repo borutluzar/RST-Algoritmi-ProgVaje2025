@@ -1,9 +1,14 @@
-﻿namespace RST_Algoritmi_ProgVaje2025
+﻿using System.Diagnostics;
+
+namespace RST_Algoritmi_ProgVaje2025
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            // ****************
+            // Požrešna metoda
+            /*
             Graph g = new Graph();
             g.AddEdge(new Edge(1, 2, 3));
             g.AddEdge(new Edge(1, 6, 2));
@@ -22,6 +27,32 @@
             // g.GetConnectedComponents();
             // g.ContainsCycle();
             Console.WriteLine("Skupna teža po Kruskalu: " + g.FindMinimalSpanningTreeWithKruskal()); 
+            Console.Read();
+            */
+
+            // ****************
+            // Dinamično programiranje
+
+            int n = 25; //5000;
+            int k = 16;  //1300;
+
+            Console.WriteLine($"Vrednost binomskega simbola {n} nad {k} je:");
+
+            Stopwatch swTimer = Stopwatch.StartNew();
+            // Osnovno rekurzivno funkcijo moramo pri večjih vrednostih n in k zakomentirati,
+            // ker ne bo uspela izračunati v realnem času
+            long resultRec = DynamicProgramming.PascalovaIdentiteta(n, k);
+            Console.WriteLine($"-\tz navadno rekurzijo: {resultRec} (v času: {swTimer.Elapsed.TotalSeconds:0.000})");
+
+            swTimer.Restart();
+            Dictionary<(int N, int K), long> dicStore = new();
+            long resultMemo = DynamicProgramming.PascalovaIdentitetaMemo(n, k, dicStore);
+            Console.WriteLine($"-\tz memoizacijo: {resultMemo} (v času: {swTimer.Elapsed.TotalSeconds:0.000})");
+
+            swTimer.Restart();
+            long resultTabu = DynamicProgramming.PascalovaIdentitetaTabu(n,k);
+            Console.WriteLine($"-\ts tabulacijo: {resultTabu} (v času: {swTimer.Elapsed.TotalSeconds:0.000})");
+
             Console.Read();
         }
     }
