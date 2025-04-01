@@ -32,8 +32,8 @@ namespace RST_Algoritmi_ProgVaje2025
 
             // ****************
             // Dinamično programiranje
-
-            int n = 25; //5000;
+            /*
+            int n = 32; //5000;
             int k = 16;  //1300;
 
             Console.WriteLine($"Vrednost binomskega simbola {n} nad {k} je:");
@@ -52,6 +52,10 @@ namespace RST_Algoritmi_ProgVaje2025
             swTimer.Restart();
             long resultTabu = DynamicProgramming.PascalovaIdentitetaTabu(n,k);
             Console.WriteLine($"-\ts tabulacijo: {resultTabu} (v času: {swTimer.Elapsed.TotalSeconds:0.000})");
+            */
+
+            //  Dijkstra
+
 
             Console.Read();
         }

@@ -58,7 +58,7 @@ namespace RST_Algoritmi_ProgVaje2025
             Dictionary<(int, int), long> dicStore = new Dictionary<(int, int), long>();
             dicStore[(1, 1)] = 1;
 
-            // Vrednosti 
+            // Vrednosti n
             for (int i = 2; i <= n; i++)
             {
                 // Diagonalne elemente zapišemo ločeno
@@ -66,6 +66,7 @@ namespace RST_Algoritmi_ProgVaje2025
                 // Elemente prve vrstice tudi
                 dicStore[(i, 1)] = i;
 
+                // Vrednosti k
                 for (int j = 2; j <= Math.Min(i - 1, k); j++)
                 {
                     dicStore[(i, j)] = dicStore[(i - 1, j - 1)] + dicStore[(i - 1, j)];
