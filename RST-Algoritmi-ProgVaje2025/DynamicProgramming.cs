@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace RST_Algoritmi_ProgVaje2025
 {
     public class DynamicProgramming
@@ -74,6 +69,64 @@ namespace RST_Algoritmi_ProgVaje2025
             }
 
             return dicStore[(n, k)];
+        }
+
+        /// <summary>
+        /// Computes the (weighted) distance from the start vertex to all other vertices in the graph
+        /// </summary>
+        public static Dictionary<int, DijkstraVertex> Dijkstra(Graph g, int startVertex)
+        {
+            Dictionary<int, DijkstraVertex> dicData = new Dictionary<int, DijkstraVertex>();
+
+            // Initialize all Dijkstra objects
+            foreach (var v in g.Vertices)
+            {
+                DijkstraVertex dObj = new DijkstraVertex(v) { Potential = int.MaxValue, TempDistance = int.MaxValue };
+                dicData.Add(v, dObj);
+            }
+
+            int currentVertex = startVertex;
+            dicData[currentVertex].TempDistance = 0;
+
+            PriorityQueue<int, int> queVerts = new PriorityQueue<int, int>();
+            queVerts.Enqueue(currentVertex, dicData[currentVertex].TempDistance);
+
+            while (queVerts.Count > 0)
+            {
+                currentVertex = queVerts.Dequeue();
+                dicData[currentVertex].Potential = dicData[currentVertex].TempDistance;
+
+                foreach (var edge in g.IncidentEdges[currentVertex])
+                {
+                    int otherVertex = edge.Start == currentVertex ? edge.End : edge.Start;
+                    if (dicData[otherVertex].Potential < int.MaxValue)
+                        continue;
+
+                    dicData[otherVertex].TempDistance = 
+                        Math.Min(dicData[otherVertex].TempDistance, dicData[currentVertex].Potential + edge.Weight);
+                    queVerts.Enqueue(otherVertex, dicData[otherVertex].TempDistance);
+                }
+            }
+
+            return dicData;
+        }
+
+
+        public class DijkstraVertex
+        {
+            public DijkstraVertex(int vertex)
+            {
+                this.Vertex = vertex;
+            }
+
+            public int Vertex { get; }
+            public int Potential { get; set; }
+            public int TempDistance { get; set; }
+
+            public override string ToString()
+            {
+                return $"{Vertex} - td: {TempDistance}; pt: {Potential}";
+            }
         }
     }
 }

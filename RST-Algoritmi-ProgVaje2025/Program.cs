@@ -54,8 +54,23 @@ namespace RST_Algoritmi_ProgVaje2025
             Console.WriteLine($"-\ts tabulacijo: {resultTabu} (v času: {swTimer.Elapsed.TotalSeconds:0.000})");
             */
 
-            //  Dijkstra
+            //  Dijkstrov algoritem
+            Graph g = new Graph();
+            g.AddEdge(new Edge(0, 1, 1));
+            g.AddEdge(new Edge(0, 2, 2));
+            g.AddEdge(new Edge(1, 4, 3));
+            g.AddEdge(new Edge(2, 3, 1));
+            g.AddEdge(new Edge(2, 4, 1));
+            g.AddEdge(new Edge(4, 3, 3));
 
+            int start = 0;
+            var results = DynamicProgramming.Dijkstra(g, start);
+
+            Console.WriteLine($"Razdalje od vozlišča {start} so:");
+            foreach (int v in results.Keys.OrderBy(x => x))
+            {
+                Console.WriteLine(results[v]);
+            }
 
             Console.Read();
         }

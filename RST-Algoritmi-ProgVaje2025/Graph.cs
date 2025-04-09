@@ -6,6 +6,8 @@ namespace RST_Algoritmi_ProgVaje2025
     {
         public HashSet<int> Vertices { get; set; } = [];
         public List<Edge> Edges { get; set; } = [];
+        public Dictionary<int, HashSet<int>> Neighbors { get; } = new Dictionary<int, HashSet<int>>();
+        public Dictionary<int, HashSet<Edge>> IncidentEdges { get; } = new Dictionary<int, HashSet<Edge>>();
 
         public Graph(int n)
         {
@@ -18,18 +20,36 @@ namespace RST_Algoritmi_ProgVaje2025
         /// Adds an edge in the graph if it does not exists. 
         /// Otherwise it increases the weight. 
         /// </summary>
-        /// <param name="e"></param>
         public void AddEdge(Edge e)
         {
             Vertices.Add(e.Start);
             Vertices.Add(e.End);
 
             if (!Edges.Contains(e))
+            {
                 Edges.Add(e);
+
+                if (!Neighbors.ContainsKey(e.Start)) Neighbors.Add(e.Start, new HashSet<int>());
+                if (!Neighbors.ContainsKey(e.End)) Neighbors.Add(e.End, new HashSet<int>());
+                if (!IncidentEdges.ContainsKey(e.End)) IncidentEdges.Add(e.End, new HashSet<Edge>());
+                if (!IncidentEdges.ContainsKey(e.Start)) IncidentEdges.Add(e.Start, new HashSet<Edge>());
+
+                Neighbors[e.Start].Add(e.End);
+                Neighbors[e.End].Add(e.Start);
+                IncidentEdges[e.Start].Add(e);
+                IncidentEdges[e.End].Add(e);
+            }
             else
             {
                 var edgeCurrent = Edges.Where(x => x.Equals(e)).FirstOrDefault();
                 edgeCurrent.Weight += e.Weight;
+                Edges.Remove(e);
+                Edges.Add(edgeCurrent);
+
+                IncidentEdges[e.Start].Remove(e);
+                IncidentEdges[e.Start].Add(edgeCurrent);
+                IncidentEdges[e.End].Remove(e);
+                IncidentEdges[e.End].Add(edgeCurrent);
             }
         }
 
