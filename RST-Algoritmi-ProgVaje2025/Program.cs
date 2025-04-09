@@ -56,14 +56,28 @@ namespace RST_Algoritmi_ProgVaje2025
 
             //  Dijkstrov algoritem
             Graph g = new Graph();
-            g.AddEdge(new Edge(0, 1, 1));
-            g.AddEdge(new Edge(0, 2, 2));
-            g.AddEdge(new Edge(1, 4, 3));
+            g.AddEdge(new Edge(1, 2, 2));
+            g.AddEdge(new Edge(1, 3, 1));
+            g.AddEdge(new Edge(1, 4, 2));
+            g.AddEdge(new Edge(1, 5, 5));
             g.AddEdge(new Edge(2, 3, 1));
-            g.AddEdge(new Edge(2, 4, 1));
-            g.AddEdge(new Edge(4, 3, 3));
+            g.AddEdge(new Edge(2, 5, 4));
+            g.AddEdge(new Edge(2, 6, 1));
+            g.AddEdge(new Edge(3, 6, 3));
+            g.AddEdge(new Edge(4, 6, 5));
+            g.AddEdge(new Edge(4, 7, 1));
+            g.AddEdge(new Edge(5, 6, 4));
+            g.AddEdge(new Edge(5, 8, 5));
+            g.AddEdge(new Edge(6, 7, 4));
+            g.AddEdge(new Edge(6, 8, 2));
+            g.AddEdge(new Edge(6, 9, 3));
+            g.AddEdge(new Edge(6, 10, 2));
+            g.AddEdge(new Edge(7, 8, 6));
+            g.AddEdge(new Edge(8, 10, 1));
+            g.AddEdge(new Edge(9, 10, 4));
 
-            int start = 0;
+
+            int start = 1;
             var results = DynamicProgramming.Dijkstra(g, start);
 
             Console.WriteLine($"Razdalje od vozlišča {start} so:");
