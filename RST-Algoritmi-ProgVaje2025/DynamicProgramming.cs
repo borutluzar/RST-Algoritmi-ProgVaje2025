@@ -94,6 +94,10 @@ namespace RST_Algoritmi_ProgVaje2025
             while (queVerts.Count > 0)
             {
                 currentVertex = queVerts.Dequeue();
+
+                if (dicData[currentVertex].Potential < int.MaxValue) // To check if needed
+                    continue;
+
                 dicData[currentVertex].Potential = dicData[currentVertex].TempDistance;
 
                 foreach (var edge in g.IncidentEdges[currentVertex])
